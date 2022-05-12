@@ -1,0 +1,34 @@
+.responses {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.promptresponse {
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  background-color: #fec89a;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.prompt,
+.airesponse {
+  display: flex;
+  column-gap: 0.5rem;
+}
+
+.promptlabel,
+.airesponselabel {
+  font-weight: 600;
+}
+
+.promptmsg {
+  margin-left: 2rem;
+}
+
+.airesponsemsg {
+  margin-left: 1.1rem;
+}

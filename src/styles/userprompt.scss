@@ -1,0 +1,64 @@
+.userprompt {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.maintitle {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.enterprompt {
+  font-size: 1.1rem;
+}
+
+.btnsubmit {
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin: 0 auto;
+  color: white;
+  background-color: #0066ff;
+  min-width: 10rem;
+}
+
+.btnsubmit:hover {
+  cursor: pointer;
+}
+
+.prompttextarea {
+  resize: vertical;
+  padding: 1rem 1.2rem;
+  height: 5rem;
+}
+
+.prompttextarea:focus {
+  outline: none;
+}
+
+.responsestext {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.errormsg {
+  color: red;
+}
+
+.selectengines {
+  margin-top: 1rem;
+  display: flex;
+  column-gap: 1rem;
+}
+
+.selectaienginetext {
+  font-size: 1.1rem;
+}
+
+.enginesdropdown {
+  padding: 0.2rem;
+  border: 0.125rem solid #0066ff;
+  border-radius: 0.25rem;
+}
