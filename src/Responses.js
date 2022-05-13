@@ -12,6 +12,7 @@ function Responses({ data, prompt, airesponses }) {
     ) {
       const response = data.choices[0];
       airesponses.unshift({ id: data.id, prompt, response: response.text });
+      // store responses to localstorage so that responses array will remain until the user clears the browser cache
       localStorage.setItem("airesponses", JSON.stringify(airesponses));
     }
     return (

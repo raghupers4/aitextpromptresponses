@@ -5,6 +5,7 @@ import "./styles/userprompt.scss";
 
 let airesponses;
 
+// function to load previous responses from local storage
 (function loadAiResponses() {
   airesponses = JSON.parse(localStorage.getItem("airesponses")) || [];
 })();
@@ -46,8 +47,6 @@ function UserPrompt() {
   const [engine, setEngine] = useState("text-curie-001");
   const [responseData, setResponseData] = useState(null);
   const [loadingText, setLoadingText] = useState("");
-
-  // const [isSubmitBtnDisabled, setIsSubmitBtnDisabled] = useState(false);
   const textAreaRef = useRef();
 
   const btnSubmitText = "Submit";
@@ -77,7 +76,6 @@ function UserPrompt() {
     }
     setErrorMsg("");
     setIsLoading(true);
-    // setIsSubmitBtnDisabled(true);
     setLoadingText(`Loading AI response for the prompt: "${textAreaText}"`);
     const aiResponse = await fetchAIResponse(url, textAreaText);
     if (aiResponse.error && aiResponse.error.message) {
@@ -86,7 +84,6 @@ function UserPrompt() {
       setResponseData(aiResponse);
     }
     setIsLoading(false);
-    // setIsSubmitBtnDisabled(false);
     setPromptText(textAreaText);
     setTextAreaText("");
   };
