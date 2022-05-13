@@ -1,14 +1,18 @@
 import React from "react";
 import ResponseComp from "./ResponseComp";
 import "./styles/promptresponses.scss";
-const airesponses = [];
 
 // component that displays list of responses
-function Responses({ data, prompt }) {
-  if (data && data.choices.length > 0) {
-    const response = data.choices[0];
-    if (!airesponses.find((airesponse) => airesponse.id === data.id)) {
+function Responses({ data, prompt, airesponses }) {
+  if (airesponses.length > 0 || data?.choices?.length > 0) {
+    if (
+      data?.choices?.length > 0 &&
+      airesponses &&
+      !airesponses.find((airesponse) => airesponse.id === data.id)
+    ) {
+      const response = data.choices[0];
       airesponses.unshift({ id: data.id, prompt, response: response.text });
+      localStorage.setItem("airesponses", JSON.stringify(airesponses));
     }
     return (
       <div className="responses">

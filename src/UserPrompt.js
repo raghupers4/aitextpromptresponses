@@ -3,6 +3,12 @@ import api from "./api/instance";
 import Responses from "./Responses";
 import "./styles/userprompt.scss";
 
+let airesponses;
+
+(function loadAiResponses() {
+  airesponses = JSON.parse(localStorage.getItem("airesponses")) || [];
+})();
+
 // function to fetch api data from AI engine
 async function fetchAIResponse(url, promptmsg) {
   try {
@@ -27,7 +33,7 @@ async function fetchAIResponse(url, promptmsg) {
     return null;
   } catch (err) {
     console.log(err);
-    throw new Error(err);
+    return err?.response?.data ?? { error: { message: err?.message } };
   }
 }
 
@@ -35,14 +41,16 @@ async function fetchAIResponse(url, promptmsg) {
 function UserPrompt() {
   const [textAreaText, setTextAreaText] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [promptText, setPromptText] = useState("");
   const [engine, setEngine] = useState("text-curie-001");
   const [responseData, setResponseData] = useState(null);
-  const [submitBtnText, setSubmitBtnText] = useState("");
+  const [loadingText, setLoadingText] = useState("");
+
+  // const [isSubmitBtnDisabled, setIsSubmitBtnDisabled] = useState(false);
   const textAreaRef = useRef();
 
   const btnSubmitText = "Submit";
-  const loadingText = "Loading...";
   const engines = [
     "text-curie-001",
     "text-davinci-002",
@@ -53,7 +61,6 @@ function UserPrompt() {
 
   useEffect(() => {
     textAreaRef.current.focus();
-    setSubmitBtnText(btnSubmitText);
   }, []);
 
   const handleTextAreaOnChange = (evt) => {
@@ -69,12 +76,19 @@ function UserPrompt() {
       return;
     }
     setErrorMsg("");
-    setSubmitBtnText(loadingText);
+    setIsLoading(true);
+    // setIsSubmitBtnDisabled(true);
+    setLoadingText(`Loading AI response for the prompt: "${textAreaText}"`);
     const aiResponse = await fetchAIResponse(url, textAreaText);
-    setResponseData(aiResponse);
+    if (aiResponse.error && aiResponse.error.message) {
+      setErrorMsg(aiResponse.error.message);
+    } else {
+      setResponseData(aiResponse);
+    }
+    setIsLoading(false);
+    // setIsSubmitBtnDisabled(false);
     setPromptText(textAreaText);
     setTextAreaText("");
-    setSubmitBtnText(btnSubmitText);
   };
 
   const handleEngineSelectionChange = (evt) => {
@@ -104,10 +118,19 @@ function UserPrompt() {
       ></textarea>
       {errorMsg && <div className="errormsg">{errorMsg}</div>}
       <button className="btnsubmit" onClick={handleSubmitClick}>
-        {submitBtnText}
+        {btnSubmitText}
       </button>
-      {responseData && <div className="responsestext">Responses</div>}
-      {responseData && <Responses data={responseData} prompt={promptText} />}
+      {isLoading && <div className="loadingtext">{loadingText}</div>}
+      {(airesponses.length > 0 || responseData) && (
+        <div className="responsestext">Responses</div>
+      )}
+      {(airesponses.length > 0 || responseData) && (
+        <Responses
+          airesponses={airesponses}
+          data={responseData}
+          prompt={promptText}
+        />
+      )}
     </div>
   );
 }
