@@ -49,6 +49,8 @@ function UserPrompt() {
   const [loadingText, setLoadingText] = useState("");
   const textAreaRef = useRef();
 
+  const textAreaPlaceholdertext =
+    "Ask something to receive a automated response from AI";
   const btnSubmitText = "Submit";
   const engines = [
     "text-curie-001",
@@ -111,6 +113,7 @@ function UserPrompt() {
         ref={textAreaRef}
         className="prompttextarea"
         value={textAreaText}
+        placeholder={textAreaPlaceholdertext}
         onChange={handleTextAreaOnChange}
       ></textarea>
       {errorMsg && <div className="errormsg">{errorMsg}</div>}
