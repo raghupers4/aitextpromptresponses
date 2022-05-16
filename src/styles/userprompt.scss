@@ -13,7 +13,8 @@
   font-size: 1.1rem;
 }
 
-.btnsubmit {
+.btnsubmit-enabled,
+.btnsubmit-disabled {
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
   border: none;
@@ -22,16 +23,20 @@
   min-width: 10rem;
 }
 
-.disabled {
+.btnsubmit-disabled {
   background-color: lightgrey;
 }
 
-.enabled {
+.btnsubmit-enabled {
   background-color: #0066ff;
 }
 
-.btnsubmit:hover {
+.btnsubmit-enabled:hover {
   cursor: pointer;
+}
+
+.btnsubmit-disabled:hover {
+  cursor: not-allowed;
 }
 
 .prompttextarea {

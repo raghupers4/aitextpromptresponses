@@ -95,7 +95,7 @@ function UserPrompt() {
       <button
         disabled={isSubmitBtnDisabled}
         className={
-          isSubmitBtnDisabled ? "btnsubmit disabled" : "btnsubmit enabled"
+          isSubmitBtnDisabled ? "btnsubmit-disabled" : "btnsubmit-enabled"
         }
         onClick={handleSubmitClick}
       >
