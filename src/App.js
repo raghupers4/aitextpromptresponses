@@ -1,6 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
-import UserPrompt from "./UserPrompt";
+import UserPrompt from "./components/UserPrompt";
 
 function App() {
   return (

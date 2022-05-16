@@ -1,6 +1,6 @@
 import React from "react";
 import ResponseComp from "./ResponseComp";
-import "./styles/promptresponses.scss";
+import "../styles/promptresponses.scss";
 
 // component that displays list of responses
 function Responses({ data, prompt, airesponses }) {
